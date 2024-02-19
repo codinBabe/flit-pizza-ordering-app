@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+input[type=text], input[type=password],input[type=email],textarea{
+  @apply block border w-full p-4 my-5 rounded-md
+}
+input[type=text]:disabled, input[type=password]:disabled,input[type=email]:disabled{
+  @apply cursor-not-allowed bg-slate-300
+}
+button{
+  @apply block w-full font-semibold text-white p-3
+}
+button[type=submit]{
+  @apply border
+}
+
+button[type=submit]:disabled{
+  @apply cursor-not-allowed bg-primarybg
+}
