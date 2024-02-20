@@ -36,7 +36,7 @@ export default function Login() {
                 </div>
                 <button type='button' onClick={() => signIn('google', { callbackUrl: '/profile' })}
                     className="text-black flex justify-center items-center gap-2 mt-5 border">
-                    <img src="/images/google-icon.png" alt="goggle icon" width={30} /> Login with goggle
+                    <img src="/google-icon.png" alt="goggle icon" width={30} /> Login with goggle
                 </button>
             </form>
         </main>

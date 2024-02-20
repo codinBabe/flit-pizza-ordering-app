@@ -13,7 +13,7 @@ export default function ContactPage() {
                     <button className="text-white bg-primarybtn p-4 rounded-md w-full" type="submit">SEND MESSAGE</button>
                 </form>
                 <div>
-                    <img className="transition-transform duration-300 transform hover:scale-110" src="/images/berry-pizza.png" alt="berry-pizza" width="500px" />
+                    <img className="transition-transform duration-300 transform hover:scale-110" src="/berry-pizza.png" alt="berry-pizza" width="500px" />
                 </div>
             </div>
         </main>

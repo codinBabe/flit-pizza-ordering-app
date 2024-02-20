@@ -1,18 +1,13 @@
 import Image from 'next/image';
 import { FaShoppingCart } from "react-icons/fa";
-import pizza from '../../public/images/berry-pizza.png';
-import pizza2 from '../../public/images/pizza2.png';
-import garlic from '../../public/images/garlic.png';
-import onion from '../../public/images/pizza-onion.png';
-import slicedpizza from '../../public/images/slicedpizza.png';
 import Link from 'next/link';
 export default function Hero() {
     return (
         <section className='p-8'>
             <div>
-                <h1 className='text-5xl font-semibold my-5 leading-tight
-                '>Handmade,<br />
-                    With an Extra <br />
+                <h1 className='text-5xl w-80 font-semibold my-5 leading-tight
+                '>Handmade,
+                    With an Extra
                     Pinch of <span className='text-primary_text_red'>Love</span>
                 </h1>
                 <p className='text-2xl leading-normal m-0'>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
@@ -20,23 +15,32 @@ export default function Hero() {
             </div>
             <div>
                 <Image className='hidden lg:'
-                    src={pizza}
+                    src={'/berry-pizza.png'}
                     alt='pizza'
+                    width={100}
+                    height={100}
                 />
             </div>
             <div>
                 <Image className='hidden lg:'
-                    src={onion}
+                    src={'/pizza-onion.png'}
                     alt='onion'
+                    width={100}
+                    height={100}
                 />
                 <Image className='hidden lg:'
-                    src={pizza2}
-                    alt='pizza2' />
+                    src={'/pizza2.png'}
+                    alt='pizza2'
+                    width={100}
+                    height={100}
+                     />
             </div>
             <div className='my-12'>
                 <Image
-                    src={slicedpizza}
+                    src={'/sliced-pizza.png'}
                     alt='sliced-pizza'
+                    width={300}
+                    height={300}
                 />
             </div>
             <div>
@@ -44,7 +48,7 @@ export default function Hero() {
                 <div className='flex gap-1 items-center'>
                     <p className='text-base leading-loose'>There are many variations of passages of Lorem Ipsum available, but the majority have</p>
                     <Image
-                        src={garlic}
+                        src={'/garlic.png'}
                         alt='garlic'
                         width={60}
                         height={40}

@@ -62,7 +62,7 @@ export default function SignUp() {
                 </div>
                 <button type='button'
                     onClick={() => signIn('google', { callbackUrl: '/' })} className="text-black flex justify-center items-center gap-2 mt-5 border">
-                    <img src='./images/google-icon.png' alt='google-icon' width={30} />
+                    <img src='/google-icon.png' alt='google-icon' width={30} />
                     Sign Up with goggle
                 </button>
             </form>

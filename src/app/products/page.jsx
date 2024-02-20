@@ -1,4 +1,4 @@
-import Dish from "../components/Dish";
+import Dish from "@/components/Dish";
 
 export default function ProductPage(){
     return(

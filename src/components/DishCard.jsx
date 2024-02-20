@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaCartShopping } from 'react-icons/fa6';
+import { FaShoppingCart } from 'react-icons/fa';
 
 export default function DishCard({ id, image, name, price, rating, description }) {
     return (
@@ -14,7 +14,7 @@ export default function DishCard({ id, image, name, price, rating, description }
                     <p className='mb-4'>{rating}</p>
                     <p>{description}</p>
                     <button className='flex item-center justify-center gap-2 bg-primarybtn rounded-full my-5'>
-                        <FaCartShopping className='mt-1' />
+                        <FaShoppingCart className='mt-1' />
                         ORDER NOW
                     </button>
             </Link>

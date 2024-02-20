@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { FaCartShopping } from 'react-icons/fa6';
 
 export default function ReviewCard({ image, name, review }) {
     return (

@@ -4,7 +4,7 @@ const popularDishes = [
     {
         id: 1,
         name: 'Burga Pizza',
-        image: '/images/burger.jpg',
+        image: '/burger.jpg',
         price: 12.99,
         rating: '⭐⭐⭐⭐⭐',
         description: 'This is a burga pizza'
@@ -12,7 +12,7 @@ const popularDishes = [
     {
         id: 2,
         name: 'Vegetarian Pizza',
-        image: '/images/product3_pizza.jpg',
+        image: '/product3_pizza.jpg',
         price: 11.99,
         rating: '⭐⭐⭐⭐⭐',
         description: 'This is a vegetarian pizza'
@@ -20,7 +20,7 @@ const popularDishes = [
     {
         id: 3,
         name: 'Sandwich',
-        image: '/images/sandwich.jpg',
+        image: '/sandwich.jpg',
         price: 20,
         rating: '⭐⭐⭐⭐⭐',
         description: 'This is a sandwich'
@@ -28,7 +28,7 @@ const popularDishes = [
     {
         id: 2,
         name: 'Greek Pizza',
-        image: '/images/pizza2.png',
+        image: '/pizza2.png',
         price: 11.99,
         rating: '⭐⭐⭐⭐⭐',
         description: 'This is a greek pizza'

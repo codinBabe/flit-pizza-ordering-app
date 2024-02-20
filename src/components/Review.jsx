@@ -1,30 +1,29 @@
-import Image from "next/image"
-import Leaf from '../../public/images/leaf.png'
-import ReviewCard from "./ReviewCard"
+import Image from 'next/image';
+import ReviewCard from './ReviewCard';
 
 const customerReview = [
     {
         id: 1,
         name: 'Tarka Bowa',
-        image: '/images/client-1.jpg',
+        image: '/client-1.jpg',
         review: 'Lorem Ipsum is simply dummy text of the printing book. it has survived not only five centuries, but also the leap.'
     },
     {
         id: 2,
         name: 'Tarka Bowa',
-        image: '/images/client-2.jpg',
+        image: '/client-2.jpg',
         review: 'Lorem Ipsum is simply dummy text of the printing book. it has survived not only five centuries, but also the leap.'
     },
     {
         id: 3,
         name: 'Tarka Bowa',
-        image: '/images/client-3.jpg',
+        image: '/client-3.jpg',
         review: 'Lorem Ipsum is simply dummy text of the printing book. it has survived not only five centuries, but also the leap.'
     },
     {
         id: 4,
         name: 'Tarka Bowa',
-        image: '/images/client-4.jpg',
+        image: '/client-4.jpg',
         review: 'Lorem Ipsum is simply dummy text of the printing book. it has survived not only five centuries, but also the leap.'
     }
 ]
@@ -33,7 +32,7 @@ export default function Review() {
         <section className='p-8'>
             <div className="mb-10">
                 <Image 
-                    src={Leaf}
+                    src={'/leaf.png'}
                     alt="leaf"
                     width={50}
                     height={50}

@@ -37,12 +37,12 @@ export default function Footer() {
                 <h2 className='font-semibold text-lg'>SOCIAL MEDIA</h2>
                 <div className='flex items-center font-medium gap-3 text-base mt-2'>
                     <a href="https://www.facebook.com/pizzon/" target="_blank" rel="noreferrer">
-                        <img src="/images/facebook-icon.png" alt="facebook icon" width="38px" />
+                        <img src="/facebook-icon.png" alt="facebook icon" width="38px" />
                     </a>
-                    <a href='#'><img src="/images/pinterest-icon.jpg" alt="pinterest icon" width="40px" /></a>
-                    <a href='#'><img src="/images/twitter-icon.png" alt="twitter icon" width="42px" /></a>
+                    <a href='#'><img src="/pinterest-icon.jpg" alt="pinterest icon" width="40px" /></a>
+                    <a href='#'><img src="/twitter-icon.png" alt="twitter icon" width="42px" /></a>
                     <a href="https://www.instagram.com/pizzon_/" target="_blank" rel="noreferrer">
-                        <img src="/images/instagram-icon.jpg" alt="instagram icon" width="40px" />
+                        <img src="/instagram-icon.jpg" alt="instagram icon" width="40px" />
                     </a>
                 </div>
                 <p className='text-gray-500 text-sm font-medium my-4'>Sign up and get exclusive offers and coupon codes</p>

@@ -1,5 +1,5 @@
-import clientPromise from "../../../libs/mongoConnect"; 
-import { User } from "../../../models/User";
+import clientPromise from "@/libs/mongoConnect"; 
+import { User } from "@/models/User";
 import bcrypt from "bcrypt";
 import * as mongoose from "mongoose";
 import NextAuth from "next-auth";

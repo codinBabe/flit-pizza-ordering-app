@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import Logo from '../../public/images/pizza-logo.png';
 import { FaShoppingCart } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { useSession } from 'next-auth/react';
@@ -11,18 +10,17 @@ export default function Header() {
     const status = session?.status;
     const userData = session.data?.user;
     let userName = userData?.name || userData?.email;
-    if (userName && userName.includes(' ')){
+    if (userName && userName.includes(' ')) {
         userName = userName.split(' ')[0];
     }
     return (
-        <header className='px-6 py-3 md:px-10 md:py-3 flex items-center justify-between text-center shadow-md sticky top-0 z-50 w-full bg-white lg:bg-tomato'>
+        <header className='px-6 py-3 md:px-10 md:py-3 flex items-center justify-between text-center shadow-md sticky top-0 z-50 w-full bg-white'>
             <Image className='flex items-center'
-                src={Logo}
+                src={'/pizza-logo.png'}
                 alt='pizzon logo'
                 width={70}
                 height={50}
                 quality={100}
-                placeholder='blur'
             />
             <div className='flex items-center gap-5 mr-8 lg:hidden'>
                 <Link href={'#'}><FaSearch /></Link>
@@ -35,10 +33,10 @@ export default function Header() {
                 <Link href={'/contact'}>CONTACT</Link>
                 {status === 'authenticated' && (
                     <>
-                    <Link href={'/profile'} className="whitespace-nowrap">
-                    Hello, {userName}
-                    </Link>
-                    <button onClick={() => signOut()}>LOGOUT</button>
+                        <Link href={'/profile'} className="whitespace-nowrap">
+                            Hello, {userName}
+                        </Link>
+                        <button onClick={() => signOut()}>LOGOUT</button>
                     </>
                 )}
                 {status === 'unauthenticated' && (
