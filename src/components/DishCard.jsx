@@ -13,7 +13,7 @@ export default function DishCard({ id, image, name, price, rating, description }
                     </div>
                     <p className='mb-4'>{rating}</p>
                     <p>{description}</p>
-                    <button className='flex item-center justify-center gap-2 bg-primarybtn rounded-full my-5'>
+                    <button className='flex item-center justify-center gap-2 bg-primarybtn rounded-full my-5 text-white'>
                         <FaShoppingCart className='mt-1' />
                         ORDER NOW
                     </button>

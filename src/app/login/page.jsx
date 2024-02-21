@@ -1,5 +1,5 @@
 "use client"
-import {signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -12,19 +12,7 @@ export default function Login() {
         e.preventDefault();
         setLoginInProgress(true);
 
-        try {
-            const result = await signIn('credentials', { email, password });
-            if (result.error) {
-                setAuthError(result.error);
-            } else {
-                // Authentication succeeded, update session if needed
-                console.log('Authentication succeeded:', result);
-            }
-        } catch (error) {
-            console.error('Error signing in:', error);
-            setAuthError(error.message);
-        }
-
+        await signIn('credentials', { email, password, callbackUrl: '/' });
         setLoginInProgress(false);
     }
     return (

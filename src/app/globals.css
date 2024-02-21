@@ -10,7 +10,7 @@ input[type=text]:disabled, input[type=password]:disabled,input[type=email]:disab
   @apply cursor-not-allowed bg-slate-300
 }
 button{
-  @apply block w-full font-semibold text-white p-3
+  @apply block w-full font-semibold p-3
 }
 button[type=submit]{
   @apply border

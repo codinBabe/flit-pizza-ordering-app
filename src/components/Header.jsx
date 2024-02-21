@@ -9,13 +9,13 @@ export default function Header() {
     const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
     const session = useSession();
     console.log({session});
-    // const status = session?.status;
-    // console.log({status});
-    // const userData = session.data?.user;
-    // let userName = userData?.name || userData?.email;
-    // if (userName && userName.includes(' ')) {
-    //     userName = userName.split(' ')[0];
-    // }
+    const status = session?.status;
+    console.log({status})
+    const userData = session.data?.user;
+    let userName = userData?.name || userData?.email;
+    if (userName && userName.includes(' ')) {
+        userName = userName.split(' ')[0];
+    }
 
     const toggleMobileNav = () => {
         setIsMobileNavOpen(!isMobileNavOpen);
@@ -44,17 +44,17 @@ export default function Header() {
                     <Link href={'/products'} className='py-2'>PRODUCTS</Link>
                     <Link href={'/blog'} className='py-2'>BLOG</Link>
                     <Link href={'/contact'} className='py-2'>CONTACT</Link>
-                    {/* {status === 'authenticated' && (
+                    {status === 'authenticated' && (
                         <>
                             <Link href={'/profile'} className="py-2 whitespace-nowrap">
                                 Hello, {userName}
                             </Link>
-                            <button onClick={() => signOut()} className='py-2'>LOGOUT</button>
+                            <button onClick={() => signOut()}>LOGOUT</button>
                         </>
                     )}
                     {status === 'unauthenticated' && (
                         <Link href={'/login'} className='py-2'>LOGIN</Link>
-                    )} */}
+                    )}
                 </div>
             </nav>
             <nav className='hidden lg:flex items-center gap-6 font-semibold text-base'>
@@ -62,7 +62,7 @@ export default function Header() {
                 <Link href={'/products'}>PRODUCTS</Link>
                 <Link href={'/blog'}>BLOG</Link>
                 <Link href={'/contact'}>CONTACT</Link>
-                {/* {status === 'authenticated' && (
+                {status === 'authenticated' && (
                     <>
                         <Link href={'/profile'} className="whitespace-nowrap">
                             Hello, {userName}
@@ -72,7 +72,7 @@ export default function Header() {
                 )}
                 {status === 'unauthenticated' && (
                     <Link href={'/login'}>LOGIN</Link>
-                )} */}
+                )}
                 <Link href={'#'}><FaSearch /></Link>
                 <Link href={'#'}><FaShoppingCart /></Link>
             </nav>
