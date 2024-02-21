@@ -1,5 +1,5 @@
 "use client"
-import { signIn } from "next-auth/react";
+import {signIn } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -12,7 +12,19 @@ export default function Login() {
         e.preventDefault();
         setLoginInProgress(true);
 
-        await signIn('credentials', { email, password, callbackUrl: '/profile' });
+        try {
+            const result = await signIn('credentials', { email, password });
+            if (result.error) {
+                setAuthError(result.error);
+            } else {
+                // Authentication succeeded, update session if needed
+                console.log('Authentication succeeded:', result);
+            }
+        } catch (error) {
+            console.error('Error signing in:', error);
+            setAuthError(error.message);
+        }
+
         setLoginInProgress(false);
     }
     return (
@@ -34,7 +46,7 @@ export default function Login() {
                     <p className="text-sm font-medium">Don't have an account? </p>
                     <Link className="bg-gradient-to-r from-yellow-500 to-red-500 animate-gradient text-white font-bold py-2 px-4 rounded" href={'/signup'}>Sign Up</Link>
                 </div>
-                <button type='button' onClick={() => signIn('google', { callbackUrl: '/profile' })}
+                <button type='button' onClick={() => signIn('google', { callbackUrl: '/' })}
                     className="text-black flex justify-center items-center gap-2 mt-5 border">
                     <img src="/google-icon.png" alt="goggle icon" width={30} /> Login with goggle
                 </button>

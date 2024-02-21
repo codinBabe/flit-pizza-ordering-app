@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       background: {
-        'tomato':"url('/images/pizza-tomato.png') 20% center/15% auto no-repeat",
+        tomato:"url('/images/pizza-tomato.png') 20% center/15% auto no-repeat",
       },
       colors: {
         primarybg: '#fffaed',
