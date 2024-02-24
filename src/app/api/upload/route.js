@@ -30,7 +30,7 @@ export async function POST(req) {
         }
         const fileURL = `https://storage.googleapis.com/${storageRef.bucket}/${storageRef.fullPath}`;
         
-        console.log(fileURL);
+        return Response.json(fileURL);
     }
     return Response.json(true);
 }

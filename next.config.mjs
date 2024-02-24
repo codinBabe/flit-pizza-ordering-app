@@ -8,7 +8,7 @@ const nextConfig = {
             },
             {
                 protocol:'https',
-                hostname:'pizza-ordering-app-414022.appspot.com'
+                hostname:'storage.googleapis.com'
             }
         ]
     }
