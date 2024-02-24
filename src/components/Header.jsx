@@ -8,9 +8,7 @@ import { useSession, signOut } from 'next-auth/react';
 export default function Header() {
     const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
     const session = useSession();
-    console.log({session});
     const status = session?.status;
-    console.log({status})
     const userData = session.data?.user;
     let userName = userData?.name || userData?.email;
     if (userName && userName.includes(' ')) {
