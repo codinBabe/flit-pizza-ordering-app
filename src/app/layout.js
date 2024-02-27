@@ -5,6 +5,7 @@ import { Nunito } from 'next/font/google';
 //components
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Toaster } from 'react-hot-toast';
 
 
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="scroll-smooth">
       <body className={`${nunito.className} antialiased`}>
         <AppProvider>
+          <Toaster />
           <Header />
           {children}
           <Footer />

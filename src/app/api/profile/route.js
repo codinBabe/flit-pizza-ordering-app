@@ -8,6 +8,7 @@ export async function PUT(req) {
     mongoose.connect(process.env.MONGO_URL);
     const data = await req.json();
     const {name, image, ...otherInfo} = data;
+    
     const session = await getServerSession(authOptions);
     const email = session.user.email;
 
@@ -26,5 +27,5 @@ export async function GET(){
     }
     const user = await User.findOne({email}).lean();
     const userInfo = await UserInfo.findOne({email}).lean();
-    return Response.json({...userInfo, ...userInfo});
+    return Response.json({...user, ...userInfo});
 }

@@ -3,12 +3,11 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Linefont } from "next/font/google";
 import ProfileTabs from "@/components/ProfileTabs";
+import toast from "react-hot-toast";
 
 export default function Profile() {
     const session = useSession();
-    const { status } = session;
     const [userName, setUserName] = useState('');
     const [image, setImage] = useState('');
     const [phone, setPhone] = useState('');
@@ -17,6 +16,8 @@ export default function Profile() {
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
     const [isAdmin, setIsAdmin] = useState(false);
+    const [profileFetched, setProfileFetched] = useState(false);
+    const { status } = session;
 
     useEffect(() => {
         if (status === 'authenticated') {
@@ -31,6 +32,7 @@ export default function Profile() {
                     setCity(data.city);
                     setCountry(data.country);
                     setIsAdmin(data.admin);
+                    setProfileFetched(true);
                 })
             });
         }
@@ -88,7 +90,7 @@ export default function Profile() {
         }
     }
 
-    if (status === "loading") {
+    if (status === "loading" || !profileFetched) {
         return 'Loading...';
     }
     if (status === "unauthenticated") {

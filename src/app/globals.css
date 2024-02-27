@@ -8,13 +8,13 @@ input[type=password],
 input[type=email],
 input[type=tel],
 textarea{
-  @apply block border w-full p-4 my-5 rounded-md
+  @apply block border w-full p-4 mb-2 rounded-md
 }
 input[type=text]:disabled,
 input[type=password]:disabled,
 input[type=email]:disabled,
 input[type=tel]:disabled{
-  @apply cursor-not-allowed bg-slate-300
+  @apply bg-gray-300 border-0 text-gray-500 cursor-not-allowed 
 }
 label{
   @apply text-gray-500 text-sm leading-tight
@@ -35,6 +35,6 @@ button[type=submit]:disabled{
 div.tabs > *{
   @apply bg-gray-300 text-gray-700 rounded-full py-2 px-4
 }
-div.tabs>*.active{
+div.tabs > * .active{
   @apply bg-primarybtn text-white
 }
