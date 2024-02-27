@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 import Link from 'next/link';
 import { usePathname } from "next/navigation";
 
@@ -18,7 +18,7 @@ export default function ProfileTabs({ isAdmin }) {
                     </Link>
                     <Link
                         href={'/menu'}
-                        className={path === '/menu' ? 'active' : ''}>
+                        className={/menu/.test(path) ? 'active' : ''}>
                         Menu
                     </Link>
                     <Link

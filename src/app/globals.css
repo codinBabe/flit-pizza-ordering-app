@@ -35,6 +35,6 @@ button[type=submit]:disabled{
 div.tabs > *{
   @apply bg-gray-300 text-gray-700 rounded-full py-2 px-4
 }
-div.tabs > * .active{
+div.tabs > *.active{
   @apply bg-primarybtn text-white
 }
