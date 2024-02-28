@@ -2,7 +2,7 @@
 import EditableImage from "@/components/EditableImage";
 import ProfileTabs from "@/components/ProfileTabs";
 import { useProfile } from "@/components/UseProfile";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -67,7 +67,7 @@ export default function NewMenu(){
                         <input type="text" value={description} onChange={e => setDescription(e.target.value)} />
                         <label>Price</label>
                         <input type="text" value={price} onChange={e => setPrice(e.target.value)} />
-                        <button className="" type="submit">Create</button>
+                        <button className="bg-primarybtn text-white rounded-md" type="submit">Create</button>
                     </div>
                 </div>
             </form>

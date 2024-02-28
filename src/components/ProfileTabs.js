@@ -1,11 +1,11 @@
-// "use client"
+"use client"
 import Link from 'next/link';
 import { usePathname } from "next/navigation";
 
 export default function ProfileTabs({ isAdmin }) {
-    const path = usePathname;
+    const path = usePathname();
     return (
-        <div className="flex gap-2 justify-center tabs">
+        <div className="tabs flex mx-auto gap-2 justify-center flex-wrap">
             <Link
                 className={path === '/profile' ? 'active' : ''}
                 href={'/profile'}>Profile</Link>

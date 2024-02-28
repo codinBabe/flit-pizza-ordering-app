@@ -74,8 +74,9 @@ export default function Categories() {
                             onChange={e => setCategoryName(e.target.value)}
                         />
                     </div>
-                    <div className="pb-3">
-                        <button type="submit">{editedCategory ? 'Edit' : 'Add'}</button>
+                    <div className="pb-2">
+                        <button className="bg-primarybtn rounded-md text-white"
+                        type="submit">{editedCategory ? 'Edit' : 'Add'}</button>
                     </div>
                 </div>
                 
