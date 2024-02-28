@@ -8,7 +8,6 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function NewMenu(){
-    
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');

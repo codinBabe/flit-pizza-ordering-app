@@ -22,7 +22,7 @@ label{
 label + input{
   margin-top: -2px;
 }
-button{
+button, .button{
   @apply block w-full font-semibold p-3
 }
 button[type=submit]{

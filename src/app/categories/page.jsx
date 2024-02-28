@@ -31,7 +31,7 @@ export default function Categories() {
                 data._id = editedCategory._id;
             }
             const response = await fetch('/api/categories', {
-                method: editedCategory? 'PUT' : 'POST',
+                method: editedCategory ? 'PUT' : 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
             });
@@ -44,10 +44,10 @@ export default function Categories() {
                 reject();
         });
         await toast.promise(creationPromise, {
-            loading: editedCategory? 'Updating category...' : 'Creating category...',
-            success: editedCategory? 'Category updated successfully' :'Category created successfully',
+            loading: editedCategory ? 'Updating category...' : 'Creating category...',
+            success: editedCategory ? 'Category updated successfully' : 'Category created successfully',
             error: 'Category creation failed'
-        })
+        });
 
     }
 
@@ -55,7 +55,7 @@ export default function Categories() {
         return 'Loading info...'
     }
     if (!profileData.admin) {
-        return redirect('/profile');
+        return 'Not an admin';
     }
     return (
         <main className="my-8 max-w-md mx-auto">
@@ -74,23 +74,24 @@ export default function Categories() {
                             onChange={e => setCategoryName(e.target.value)}
                         />
                     </div>
-                    <div className="pb-2">
+                    <div className="pb-3">
                         <button type="submit">{editedCategory ? 'Edit' : 'Add'}</button>
                     </div>
                 </div>
-                <div>
-                    <h2 className="mt-8 text-sm text-gray-500">Edit category:</h2>
-                    {categories?.length > 0 && categories.map(c => (
-                        <button onClick={() => {
-                            setEditedCategory(c);
-                            setCategoryName(c.name);
-                        }}
-                            className="rounded-xl p-2 px-4 flex gap-1 cursor-pointer mb-1">
-                            <span>{c.name}</span>
-                        </button>
-                    ))}
-                </div>
+                
             </form>
+            <div>
+                <h2 className="mt-8 text-sm text-gray-500">Edit category:</h2>
+                {categories?.length > 0 && categories.map(c => (
+                    <button onClick={() => {
+                        setEditedCategory(c);
+                        setCategoryName(c.name);
+                    }}
+                        className="rounded-xl p-2 px-4 flex gap-1 cursor-pointer mb-1">
+                        <span>{c.name}</span>
+                    </button>
+                ))}
+            </div>
         </main>
     )
 }

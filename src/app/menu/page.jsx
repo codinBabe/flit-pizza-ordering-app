@@ -32,7 +32,7 @@ export default function Menu() {
                     {menu?.length > 0 && menu.map(item => (
                         <Link href={'/menu/edit/' + item._id} className="mb-1 button flex-col">
                             <div className="relative">
-                                <Image src={item.image} alt={''} width={100} height={100} />
+                                <img src={item.image} alt={''} width={100} height={100} />
                             </div>
                             {item.name}
                         </Link>
