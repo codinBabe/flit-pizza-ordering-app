@@ -1,7 +1,7 @@
 "use client"
+import DeleteButton from "@/components/DeleteButton";
 import ProfileTabs from "@/components/ProfileTabs";
 import { useProfile } from "@/components/UseProfile";
-import { redirect } from "next/dist/server/api-utils";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -27,7 +27,7 @@ export default function Categories() {
         e.preventDefault();
         const creationPromise = new Promise(async (resolve, reject) => {
             const data = { name: categoryName };
-            if (editedCategory){
+            if (editedCategory) {
                 data._id = editedCategory._id;
             }
             const response = await fetch('/api/categories', {
@@ -50,6 +50,25 @@ export default function Categories() {
         });
 
     }
+    async function handleDeleteClick(_id) {
+        const deletePromise = new Promise(async (resolve, reject) => {
+            const response = await fetch('/api/categories?_id=' + _id, {
+                method: 'DELETE',
+            });
+            if (response.ok)
+                resolve();
+            else
+                reject();
+        });
+
+        await toast.promise(deletePromise, {
+            loading: 'Deleting...',
+            success: 'Deleted successfully',
+            error: 'Could not delete category'
+        });
+        fetchCategories();
+
+    }
 
     if (profileLoading) {
         return 'Loading info...'
@@ -64,7 +83,7 @@ export default function Categories() {
                 <div className="flex gap-2 items-end">
                     <div className="grow">
                         <label>
-                            {editedCategory ? 'Update category' : 'New category name'}
+                            {editedCategory ? 'Update category:' : 'New category name:'}
                             {editedCategory && (
                                 <>: <b>{editedCategory.name}</b></>
                             )}
@@ -74,23 +93,37 @@ export default function Categories() {
                             onChange={e => setCategoryName(e.target.value)}
                         />
                     </div>
-                    <div className="pb-2">
+                    <div className="pb-2 flex gap-2">
                         <button className="bg-primarybtn rounded-md text-white"
-                        type="submit">{editedCategory ? 'Edit' : 'Add'}</button>
+                            type="submit">{editedCategory ? 'Edit' : 'Add'}</button>
+                        <button type="button"
+                            onClick={() => {
+                                setEditedCategory(null);
+                                setCategoryName('');
+                            }}>Cancel</button>
                     </div>
                 </div>
-                
+
             </form>
             <div>
-                <h2 className="mt-8 text-sm text-gray-500">Edit category:</h2>
+                <h2 className="mt-8 text-sm text-gray-500">Existing categories</h2>
                 {categories?.length > 0 && categories.map(c => (
-                    <button onClick={() => {
-                        setEditedCategory(c);
-                        setCategoryName(c.name);
-                    }}
-                        className="rounded-xl p-2 px-4 flex gap-1 cursor-pointer mb-1">
-                        <span>{c.name}</span>
-                    </button>
+                    <div className="bg-gray-100 rounded-xl p-2 px-4 flex gap-1 mb-1 items-center">
+                        <div className="grow">
+                            <span>{c.name}</span>
+                        </div>
+                        <div className="flex gap-1">
+                            <button type="button"
+                                onClick={() => {
+                                    setEditedCategory(c);
+                                    setCategoryName(c.name);
+                                }}> Edit</button>
+                            <DeleteButton label={'Delete'}
+                                onDelete={()=>{handleDeleteClick(c._id)}}
+                            />
+                        </div>
+
+                    </div>
                 ))}
             </div>
         </main>

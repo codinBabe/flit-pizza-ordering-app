@@ -28,13 +28,16 @@ export default function Menu() {
             </div>
             <div>
                 <h2 className="text-sm text-gray-500 mt-8">Edit menu item:</h2>
-                <div className="grid grid-cols-3">
+                <div className="grid grid-cols-3 gap-2">
                     {menu?.length > 0 && menu.map(item => (
                         <Link href={'/menu/edit/' + item._id} className="mb-1 button flex-col">
                             <div className="relative">
                                 <img src={item.image} alt={''} width={100} height={100} />
                             </div>
-                            {item.name}
+                            <div className="text-center">
+                                {item.name}
+                            </div>
+                           
                         </Link>
                     ))}
                 </div>
