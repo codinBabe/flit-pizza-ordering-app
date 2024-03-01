@@ -93,7 +93,7 @@ export default function Categories() {
                             onChange={e => setCategoryName(e.target.value)}
                         />
                     </div>
-                    <div className="pb-2 flex gap-2">
+                    <div className="pb-3 flex gap-2">
                         <button className="bg-primarybtn rounded-md text-white"
                             type="submit">{editedCategory ? 'Edit' : 'Add'}</button>
                         <button type="button"

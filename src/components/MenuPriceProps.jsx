@@ -22,7 +22,7 @@ export default function MenuPriceProps({ name, addLabel, props, setProps }) {
         setProps(prev => prev.filter((v, index) => index !== indexToRemove));
     }
     return (
-        <div className="bg-gray-200 p-2 rounded-md mb-2">
+        <div className="bg-gray-100 p-2 rounded-md mb-2">
             <button onClick={() => setIsOpen(prev => !prev)}
                 className="inline-flex items-center p-1 border-0 justify-start gap-2"
                 type="button">
@@ -33,11 +33,11 @@ export default function MenuPriceProps({ name, addLabel, props, setProps }) {
                     <PiCaretDown />
                 )}
                 <span>{name}</span>
-                <span>{props?.length}</span>
+                <span>({props?.length})</span>
             </button>
             <div className={isOpen ? 'block' : 'hidden'}>
                 {props?.length > 0 && props.map((size, index) => (
-                    <div className="flex items-end gap-2">
+                    <div key={index} className="flex items-end gap-2">
                         <div>
                             <label>Name</label>
                             <input type="text"
@@ -55,7 +55,7 @@ export default function MenuPriceProps({ name, addLabel, props, setProps }) {
                         <div>
                             <button type="button"
                                 onClick={() => removeProp(index)}
-                                className="bg-white mb-3 px-2"><FaRegTrashAlt /></button>
+                                className="bg-white mb-4 px-2 rounded-md"><FaRegTrashAlt /></button>
                         </div>
                     </div>
                 ))}

@@ -14,7 +14,7 @@ export default function DeleteButton({ label, onDelete }) {
                         <button type="button"
                             onClick={() => { setShowConfirm(false) }}>Cancel</button>
                         <button type="button"
-                            className="bg-primarybtn"
+                            className="bg-primarybtn rounded-lg text-white"
                             onClick={() => { onDelete(); setShowConfirm(false) }}>Yes,&nbsp;delete!</button>
                     </div>
                 </div>
@@ -23,7 +23,7 @@ export default function DeleteButton({ label, onDelete }) {
     }
     return (
         <button type="button"
-            className="bg-primarybtn text-white rounded-md"
+            className="border rounded-md"
             onClick={() => setShowConfirm(true)}>{label}</button>
     )
 }

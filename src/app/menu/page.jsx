@@ -24,17 +24,19 @@ export default function Menu() {
         <main className="my-8 max-w-md mx-auto">
             <ProfileTabs isAdmin={true} />
             <div className="max-w-md mx-auto mt-8">
-                <Link href={'/menu/new'}>Create new menu</Link>
+                <Link href={'/menu/new'}
+                    className="button text-center border rounded-md">Create new menu</Link>
             </div>
             <div>
                 <h2 className="text-sm text-gray-500 mt-8">Edit menu item:</h2>
                 <div className="grid grid-cols-3 gap-2">
                     {menu?.length > 0 && menu.map(item => (
-                        <Link href={'/menu/edit/' + item._id} className="mb-1 button flex-col">
+                        <Link key={item._id} 
+                        href={'/menu/edit/' + item._id} className="bg-gray-100 rounded-lg p-4">
                             <div className="relative">
-                                <img src={item.image} alt={''} width={100} height={100} />
+                                <img src={item.image} alt={''} width={200} height={200} />
                             </div>
-                            <div className="text-center">
+                            <div className="text-center font-semibold">
                                 {item.name}
                             </div>
                            
