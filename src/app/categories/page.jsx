@@ -97,6 +97,7 @@ export default function Categories() {
                         <button className="bg-primarybtn rounded-md text-white"
                             type="submit">{editedCategory ? 'Edit' : 'Add'}</button>
                         <button type="button"
+                        className="border"
                             onClick={() => {
                                 setEditedCategory(null);
                                 setCategoryName('');
@@ -114,6 +115,7 @@ export default function Categories() {
                         </div>
                         <div className="flex gap-1">
                             <button type="button"
+                            className="border"
                                 onClick={() => {
                                     setEditedCategory(c);
                                     setCategoryName(c.name);

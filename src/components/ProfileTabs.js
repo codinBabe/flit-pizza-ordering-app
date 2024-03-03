@@ -23,8 +23,13 @@ export default function ProfileTabs({ isAdmin }) {
                     </Link>
                     <Link
                         href={'/users'}
-                        className={path === '/users' ? 'active' : ''}>
+                        className={path.includes('/users') ? 'active' : ''}>
                         Users
+                    </Link>
+                    <Link
+                        href={'/orders'}
+                        className={path === '/orders' ? 'active' : ''}>
+                        Orders
                     </Link>
                 </>
             )}

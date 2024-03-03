@@ -46,7 +46,7 @@ export default function NewMenu() {
         <main className="my-8">
             <ProfileTabs isAdmin={true} />
             <div className="max-w-md mx-auto mt-8">
-                <Link href={'/menu'} className="button">Show all menu</Link>
+                <Link href={'/menu'} className="button text-center border rounded-md">Show all menu</Link>
             </div>
             <MenuForm menu={null} onSubmit={handleFormSubmit} />
         </main>
