@@ -6,6 +6,7 @@ export default function MenuForm({ onSubmit, menu }) {
 
     const [image, setImage] = useState(menu?.image || '');
     const [name, setName] = useState(menu?.name || '');
+    const [rating, setRating] = useState(menu?.rating || '');
     const [description, setDescription] = useState(menu?.description || '');
     const [price, setPrice] = useState(menu?.price || '');
     const [sizes, setSizes] = useState(menu?.sizes || []);
@@ -24,7 +25,7 @@ export default function MenuForm({ onSubmit, menu }) {
 
     return (
         <form
-            onSubmit={e => onSubmit(e, { image, name, description, price, sizes, extraIngredientPrices, category })
+            onSubmit={e => onSubmit(e, { image, name, rating, description, price, sizes, extraIngredientPrices, category })
             }
             className="mt-8 max-w-md mx-auto">
             <div className="md:grid items-start gap-4"
@@ -38,6 +39,11 @@ export default function MenuForm({ onSubmit, menu }) {
                         type="text"
                         value={name}
                         onChange={e => setName(e.target.value)} />
+                    <label>Rating</label>
+                    <input
+                        type="text"
+                        value={rating}
+                        onChange={e => setRating(e.target.value)} />
                     <label>Description</label>
                     <input
                         type="text"

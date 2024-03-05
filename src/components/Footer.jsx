@@ -6,11 +6,11 @@ export default function Footer() {
             <div>
                 <h2 className='font-semibold text-lg'>INFORMATION</h2>
                 <div className='flex flex-col gap-3 font-medium text-primary_text_grey text-base mt-3'>
-                    <Link href={''}>Home</Link>
-                    <Link href={''}>Blog</Link>
-                    <Link href={''}>About Us</Link>
-                    <Link href={''}>Menu</Link>
-                    <Link href={''}>Contact Us</Link>
+                    <Link href={'/'}>Home</Link>
+                    <Link href={'/blog'}>Blog</Link>
+                    <Link href={'/#about'}>About Us</Link>
+                    <Link href={'/#menu'}>Menu</Link>
+                    <Link href={'/contact'}>Contact Us</Link>
                 </div>
             </div>
             <div>
@@ -26,9 +26,9 @@ export default function Footer() {
             <div>
                 <h2 className='font-semibold text-lg'>OTHERS</h2>
                 <div className='flex flex-col gap-3 text-primary_text_grey font-medium text-base mt-3'>
-                    <Link href={''}>Checkout</Link>
-                    <Link href={''}>Cart</Link>
-                    <Link href={''}>Product</Link>
+                    <Link href={'/cart'}>Checkout</Link>
+                    <Link href={'/cart'}>Cart</Link>
+                    <Link href={'/products'}>Products</Link>
                     <Link href={''}>Locations</Link>
                     <Link href={''}>Legal</Link>
                 </div>

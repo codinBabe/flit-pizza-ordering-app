@@ -34,7 +34,8 @@ export default function UserForm({ user, onSave }) {
                 <input
                     type="email"
                     disabled={true}
-                    value={user.email instanceof Array ? user.email.join(", ") : user.email} placeholder={'email'} />
+                    value={user?.email} 
+                    placeholder={'email'} />
                 <label>Phone Number</label>
                 <input
                     type="tel"

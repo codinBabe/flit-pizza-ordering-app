@@ -1,7 +1,7 @@
 export default function ContactPage() {
     return (
         <main className="p-12 text-center">
-            <h1 className="font-semibold text-3xl animate-fade-in mb-4">Visit or <span className="text-primary_text_red">Contact us</span></h1>
+            <h1 className="font-semibold text-3xl animate-fade-in mb-8">Visit or <span className="text-primary_text_red">Contact us</span></h1>
             <div className="flex item-center gap-48">
                 <form method="#" className="w-2/4">
                     <div className="">

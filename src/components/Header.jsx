@@ -1,9 +1,10 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaShoppingCart, FaSearch, FaBars, FaTimes } from 'react-icons/fa';
 import { useSession, signOut } from 'next-auth/react';
+import { CartContext } from './AppContext';
 
 export default function Header() {
     const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -11,6 +12,7 @@ export default function Header() {
     const status = session?.status;
     const userData = session.data?.user;
     let userName = userData?.name || userData?.email;
+    const { cartItems } = useContext(CartContext)
     if (userName && userName.includes(' ')) {
         userName = userName.split(' ')[0];
     }
@@ -33,7 +35,8 @@ export default function Header() {
                 <Link href={'#'}><FaShoppingCart /></Link>
                 <FaBars className='cursor-pointer' onClick={toggleMobileNav} />
             </div>
-            <nav className={`${isMobileNavOpen ? 'right-0' : 'right-full'} lg:hidden fixed top-0 bg-white z-50 w-2/3 h-full transition-transform transform ease-in-out duration-300`}>
+            <nav 
+            className={`${isMobileNavOpen ? 'right-0' : 'right-full'} lg:hidden fixed top-0 bg-white z-50 w-2/3 h-full transition-transform transform ease-in-out duration-300`}>
                 <div className='flex items-center justify-between px-4 py-3'>
                     <FaTimes className='cursor-pointer' onClick={toggleMobileNav} />
                 </div>
@@ -72,7 +75,14 @@ export default function Header() {
                     <Link href={'/login'}>LOGIN</Link>
                 )}
                 <Link href={'#'}><FaSearch /></Link>
-                <Link href={'#'}><FaShoppingCart /></Link>
+
+                <Link href={'/cart'} className='relative'>
+                    <FaShoppingCart />
+                    <span className='absolute -top-2 -right-2 bg-primary_text_red text-white text-xs p-1 rounded-full leading-3'>
+                    {cartItems.length}
+                    </span>
+                </Link>
+
             </nav>
         </header>
     );
