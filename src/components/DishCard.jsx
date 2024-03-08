@@ -48,11 +48,11 @@ export default function DishCard(menuItem) {
             {showPopUp && (
                 <div
                     onClick={() => setShowPopUp(false)}
-                    className="fixed inset-0 bg-black/80 flex items-center justify-center">
+                    className="fixed inset-0 z-50 overflow-y-scroll bg-black/80 flex items-center justify-center">
                     <div
                         onClick={e => e.stopPropagation()}
                         className=" my-8 bg-white p-2 rounded-lg max-w-md">
-                        <div className="overflow-y-scroll p-2"
+                        <div className="p-2"
                             style={{ maxHeight: 'calc(100vh-120px)', marginTop: '60px' }}>
                             <Image
                                 src={image}
@@ -81,7 +81,7 @@ export default function DishCard(menuItem) {
                                 <div className='py-2'>
                                     <h3 className='text-center text-gray-700'>Pick extras</h3>
                                     {extraIngredientPrices.map(extra => (
-                                        <label className='flex items-center gap-2 p-4 border rounded-md'>
+                                        <label className='flex items-center gap-2 p-4 border rounded-md mb-1'>
                                             <input
                                                 type="checkbox"
                                                 onChange={e => handleSelectedExtrasClick(e, extra)}
@@ -93,11 +93,11 @@ export default function DishCard(menuItem) {
                             )}
                             <button
                                 onClick={handleAddToCart}
-                                className='bg-primarybtn text-white sticky bottom-2'
+                                className='bg-primarybtn rounded-lg text-white sticky bottom-2'
                                 type='button'>Add to cart ${selectedPrice}
                             </button>
                             <button
-                                className='mt-2'
+                                className='mt-2 border rounded-lg'
                                 onClick={() => setShowPopUp(false)}>Cancel</button>
                         </div>
 

@@ -12,7 +12,7 @@ export default function DeleteButton({ label, onDelete }) {
                     </div>
                     <div className="flex gap-2 mt-1">
                         <button type="button"
-                        className="border"
+                            className="border-2 rounded-md"
                             onClick={() => { setShowConfirm(false) }}>Cancel</button>
                         <button type="button"
                             className="bg-primarybtn rounded-lg text-white"
@@ -24,7 +24,7 @@ export default function DeleteButton({ label, onDelete }) {
     }
     return (
         <button type="button"
-            className="border rounded-md"
+            className="border-2 rounded-md"
             onClick={() => setShowConfirm(true)}>{label}</button>
     )
 }

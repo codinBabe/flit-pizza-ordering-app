@@ -27,7 +27,7 @@ export default function Footer() {
                 <h2 className='font-semibold text-lg'>OTHERS</h2>
                 <div className='flex flex-col gap-3 text-primary_text_grey font-medium text-base mt-3'>
                     <Link href={'/cart'}>Checkout</Link>
-                    <Link href={'/cart'}>Cart</Link>
+                    <Link href={'/profile'}>Profile</Link>
                     <Link href={'/products'}>Products</Link>
                     <Link href={''}>Locations</Link>
                     <Link href={''}>Legal</Link>

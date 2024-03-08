@@ -44,7 +44,7 @@ export default function UsersPage() {
                         <div>
                             <Link
                             href={'/users/'+user._id} 
-                            className="button border rounded-md"
+                            className="button border-2 rounded-md"
                             >Edit</Link>
                         </div>
                     </div>

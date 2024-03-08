@@ -11,37 +11,37 @@ export default function CartPage() {
         total += cartProductPrice(p);
     }
     return (
-        <main className="p-12 max-w-4xl mx-auto">
-            <h1 className="font-semibold text-4xl text-center mb-8">Checkout</h1>
-            <div className="grid gap-8 grid-cols-2">
+        <main className="p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
+            <h1 className="font-semibold text-2xl md:text-4xl text-center mb-8">Checkout</h1>
+            <div className="grid gap-8 md:grid-cols-2">
                 <div>
                     {cartItems?.length === 0 && (
-                        <div>No products in your shopping cart</div>
+                        <div className="text-center">No products in your shopping cart</div>
                     )}
                     {cartItems?.length > 0 && cartItems.map((product, index) => (
-                        <div key={index} className="flex items-center gap-4 mb-2 border-b py-2">
-                            <div className="w-24">
+                        <div key={index} className="flex flex-col md:flex-row items-center md:items-start gap-4 md:mb-2 border-b py-2">
+                            <div className="w-24 md:w-32">
                                 <Image width={240} height={240} src={product.image} alt="avatar" />
                             </div>
-                            <div className="grow">
-                                <h3 className="font-semibold">{product.name}</h3>
+                            <div className="md:grow">
+                                <h3 className="font-semibold text-lg">{product.name}</h3>
                                 {product.size && (
                                     <div className="text-sm">
-                                        Size:<span>{product.size.name}</span>
+                                        Size: <span>{product.size.name}</span>
                                     </div>
                                 )}
                                 {product.extras?.length > 0 && (
                                     <div className="text-sm text-gray-500">
-                                        {product.extras.map(extra => (
-                                            <div>{extra.name} ${extra.price}</div>
+                                        {product.extras.map((extra, index) => (
+                                            <div key={index}>{extra.name} ${extra.price}</div>
                                         ))}
                                     </div>
                                 )}
                             </div>
-                            <div className="text-lg font-semibold">
+                            <div className="text-lg font-semibold md:ml-auto">
                                 ${cartProductPrice(product)}
                             </div>
-                            <div className="ml-2">
+                            <div className="md:ml-2 mt-2 md:mt-0">
                                 <button
                                     onClick={() => removeCartItem(index)}
                                     className="p-2"
@@ -51,13 +51,13 @@ export default function CartPage() {
                             </div>
                         </div>
                     ))}
-                    <div className="py-4 text-right pr-16">
+                    <div className="py-4 text-right">
                         <span className="text-gray-500">Subtotal:</span>
                         <span className="text-lg font-semibold pl-2">${total}</span>
                     </div>
                 </div>
                 <div className="bg-gray-100 p-4 rounded-lg">
-                    <h2>Checkout</h2>
+                    <h2 className="text-lg font-semibold">Checkout</h2>
                 </div>
             </div>
         </main>

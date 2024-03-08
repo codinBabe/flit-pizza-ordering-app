@@ -3,9 +3,9 @@ export default function AboutUs() {
     return (
         <section id="about" className="bg-primarybg p-8 mt-8">
             <div className="flex items-center justify-between">
-                <div className="self-start">
+                <div className="whitespace-nowrap self-start">
                     <h3 className="text-primary_text_red font-medium text-xl mb-1">Our Strength</h3>
-                    <h1 className="font-semibold text-3xl">Why We Are The Best</h1>
+                    <h1 className="font-semibold text-2xl">Why We Are The Best</h1>
                 </div>
                 <Image className=""
                     src={'/half-pizza.png'}

@@ -32,7 +32,12 @@ export default function Header() {
             />
             <div className='flex items-center gap-5 mr-8 lg:hidden'>
                 <Link href={'#'}><FaSearch /></Link>
-                <Link href={'#'}><FaShoppingCart /></Link>
+                <Link href={'/cart'} className='relative'>
+                    <FaShoppingCart />
+                    <span className='absolute -top-2 -right-3 bg-primary_text_red text-white text-xs p-1 rounded-full leading-3'>
+                        {cartItems.length}
+                    </span>
+                </Link>
                 <FaBars className='cursor-pointer' onClick={toggleMobileNav} />
             </div>
             <nav 
@@ -78,7 +83,7 @@ export default function Header() {
 
                 <Link href={'/cart'} className='relative'>
                     <FaShoppingCart />
-                    <span className='absolute -top-2 -right-2 bg-primary_text_red text-white text-xs p-1 rounded-full leading-3'>
+                    <span className='absolute -top-2 -right-3 bg-primary_text_red text-white text-xs p-1 rounded-full leading-3'>
                     {cartItems.length}
                     </span>
                 </Link>

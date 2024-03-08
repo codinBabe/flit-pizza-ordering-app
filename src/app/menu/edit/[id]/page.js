@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import MenuForm from "@/components/MenuForm";
 import DeleteButton from "@/components/DeleteButton";
 
-export default function NewMenu() {
+export default function EditMenu() {
 
     const { id } = useParams();
     const [menu, setMenu] = useState(null);
