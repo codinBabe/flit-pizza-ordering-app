@@ -21,7 +21,7 @@ export default function Menu() {
         return 'Not an admin';
     }
     return (
-        <main className="my-8 max-w-md mx-auto">
+        <main className="p-3 md:p-8 max-w-md mx-auto">
             <ProfileTabs isAdmin={true} />
             <div className="max-w-md mx-auto mt-8">
                 <Link href={'/menu/new'}

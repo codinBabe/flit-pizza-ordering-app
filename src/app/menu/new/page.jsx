@@ -43,7 +43,7 @@ export default function NewMenu() {
     }
 
     return (
-        <main className="my-8">
+        <main className="p-3 md:p-8">
             <ProfileTabs isAdmin={true} />
             <div className="max-w-md mx-auto mt-8">
                 <Link href={'/menu'} className="button text-center border rounded-md">Show all menu</Link>

@@ -63,7 +63,7 @@ export default function Header() {
                     )}
                 </div>
             </nav>
-            <nav className='hidden lg:flex items-center gap-6 font-semibold text-base'>
+            <nav className='hidden lg:flex items-center gap-4 font-semibold text-base'>
                 <Link href={'/'}>HOME</Link>
                 <Link href={'/products'}>PRODUCTS</Link>
                 <Link href={'/blog'}>BLOG</Link>

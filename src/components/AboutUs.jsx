@@ -3,16 +3,19 @@ export default function AboutUs() {
     return (
         <section id="about" className="bg-primarybg p-8 mt-8">
             <div className="flex items-center justify-between">
-                <div className="whitespace-nowrap self-start">
+                <div className="self-start grow">
                     <h3 className="text-primary_text_red font-medium text-xl mb-1">Our Strength</h3>
                     <h1 className="font-semibold text-2xl">Why We Are The Best</h1>
                 </div>
-                <Image className=""
-                    src={'/half-pizza.png'}
-                    alt="half-pizza"
-                    width={300}
-                    height={100}
-                />
+                <div>
+                    <Image
+                        src={'/half-pizza.png'}
+                        alt="half-pizza"
+                        width={300}
+                        height={100}
+                    />
+                </div>
+
             </div>
             <div className="flex flex-col gap-5 lg:flex-row lg:-mt-20">
                 <div className="flex flex-col gap-3">

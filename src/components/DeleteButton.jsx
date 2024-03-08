@@ -24,7 +24,7 @@ export default function DeleteButton({ label, onDelete }) {
     }
     return (
         <button type="button"
-            className="border-2 rounded-md"
+            className="button border-2 rounded-md"
             onClick={() => setShowConfirm(true)}>{label}</button>
     )
 }

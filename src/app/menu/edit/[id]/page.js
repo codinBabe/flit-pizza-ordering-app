@@ -48,7 +48,7 @@ export default function EditMenu() {
     }
     async function handleDeleteClick() {
         const deletePromise = new Promise(async (resolve, reject) => {
-            const response = await fetch('/api/menu?_id=' +id, {
+            const response = await fetch('/api/menu?_id=' + id, {
                 method: 'DELETE',
             });
             if (response.ok)
@@ -76,7 +76,7 @@ export default function EditMenu() {
     }
 
     return (
-        <main className="my-8">
+        <main className="p-3 md:p-8">
             <ProfileTabs isAdmin={true} />
             <div className="max-w-md mx-auto mt-8">
                 <Link href={'/menu'} className="button text-center border rounded-md">Show all menu</Link>
@@ -84,10 +84,10 @@ export default function EditMenu() {
             <MenuForm menu={menu} onSubmit={handleFormSubmit} />
             <div className="max-w-md mx-auto mt-2">
                 <div className="max-w-xs ml-auto pl-4">
-                   <DeleteButton
-                    label={'Delete'}
-                    onDelete={handleDeleteClick}
-                   />
+                    <DeleteButton
+                        label={'Delete'}
+                        onDelete={handleDeleteClick}
+                    />
                 </div>
             </div>
         </main>

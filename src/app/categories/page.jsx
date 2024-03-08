@@ -77,7 +77,7 @@ export default function Categories() {
         return 'Not an admin';
     }
     return (
-        <main className="my-8 max-w-md mx-auto">
+        <main className="p-3 md:p-8 max-w-md mx-auto">
             <ProfileTabs isAdmin={true} />
             <form className="my-8" onSubmit={handleCategory}>
                 <div className="flex gap-2 items-end">

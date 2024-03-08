@@ -47,7 +47,7 @@ export default function EditUserPage() {
     }
 
     return (
-        <main className="max-w-md mx-auto my-8">
+        <main className="max-w-md mx-auto p-3 md:p-8">
             <ProfileTabs isAdmin={true} />
             <div>
                 <UserForm user={user} onSave={handleSaveButtonClick} />

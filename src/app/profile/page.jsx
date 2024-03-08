@@ -52,7 +52,7 @@ export default function Profile() {
         return redirect('/login');
     }
     return (
-        <main className="my-8">
+        <main className="p-3 md:p-8">
             <ProfileTabs isAdmin={isAdmin} />
             <div className="max-w-md mx-auto mt-8">
                <UserForm user={user} onSave={handleProfileInfoUpdate}/>

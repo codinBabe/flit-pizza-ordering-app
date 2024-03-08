@@ -23,7 +23,7 @@ export default function UsersPage() {
     }
 
     return (
-        <main className="max-w-md mx-auto my-8">
+        <main className="max-w-md mx-auto p-3 md:p-8">
             <ProfileTabs isAdmin={true} />
             <div>
                 {users?.length > 0 && users.map(user => (
