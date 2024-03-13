@@ -1,14 +1,53 @@
 'use client'
 import { CartContext, cartProductPrice } from "@/components/AppContext"
+import { useProfile } from "@/components/UseProfile"
+import UserDetails from "@/components/UserDetails"
 import Image from "next/image"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { FaRegTrashAlt } from "react-icons/fa"
 
 export default function CartPage() {
     const { cartItems, removeCartItem } = useContext(CartContext);
-    let total = 0;
+    const [details, setDetails] = useState({});
+    const {data:profileData} = useProfile();
+
+    useEffect(()=>{
+        if (profileData?.city){
+            const {phone, streetAddress, postalCode, city, country} = profileData;
+            const detailsFromProfile = {
+                phone,
+                streetAddress,
+                postalCode,
+                city,
+                country,
+            };
+            setDetails(detailsFromProfile);
+        }
+    },[profileData]);
+
+    let subTotal = 0;
     for (const p of cartItems) {
-        total += cartProductPrice(p);
+        subTotal += cartProductPrice(p);
+    }
+
+    async function proceedToCheckout(e){
+        e.preventDefault();
+        const response = await fetch('/api/checkout',{
+            method: 'POST',
+            headers:{'Content-Type:': 'application/json'},
+            body: JSON.stringify({
+                details,
+                cartItems,
+            })
+        });
+        const link = await response.json();
+        window.location = link;
+    }
+
+    function handleDetailsChange(propName, value) {
+        setDetails(prevDetails=>{
+            return {...prevDetails, [propName]: value};
+        })
     }
     return (
         <main className="p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
@@ -19,7 +58,7 @@ export default function CartPage() {
                         <div className="text-center">No products in your shopping cart</div>
                     )}
                     {cartItems?.length > 0 && cartItems.map((product, index) => (
-                        <div key={index} className="flex flex-col md:flex-row items-center md:items-start gap-4 md:mb-2 border-b py-2">
+                        <div key={index} className="flex flex-col md:flex-row items-center md:items-start gap-4 border-b py-4">
                             <div className="w-24 md:w-32">
                                 <Image width={240} height={240} src={product.image} alt="avatar" />
                             </div>
@@ -51,13 +90,31 @@ export default function CartPage() {
                             </div>
                         </div>
                     ))}
-                    <div className="py-4 text-right">
-                        <span className="text-gray-500">Subtotal:</span>
-                        <span className="text-lg font-semibold pl-2">${total}</span>
+                    <div className="py-2 flex justify-end items-center">
+                        <div className="text-gray-500">
+                        Subtotal:<br/>
+                        Delivery:<br/>
+                        Total:
+                        </div>
+                        <div className="text-lg font-semibold pl-2 text-right">
+                            ${subTotal}<br />
+                            $5<br />
+                        ${subTotal + 5}
+                        </div>
                     </div>
                 </div>
                 <div className="bg-gray-100 p-4 rounded-lg">
                     <h2 className="text-lg font-semibold">Checkout</h2>
+                    <form onSubmit={proceedToCheckout}>
+                    <UserDetails
+                        detailsProps={details}
+                        setDetailsProps={handleDetailsChange}
+                    />
+                        <button 
+                        type="submit"
+                        className="button rounded-md bg-primarybtn text-white"
+                        >Pay ${subTotal + 5}</button>
+                    </form>
                 </div>
             </div>
         </main>

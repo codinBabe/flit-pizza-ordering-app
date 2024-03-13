@@ -25,7 +25,10 @@ export default function ProductPage() {
                     </div>
                     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6 mb-12">
                         {menuItems.filter(m => m.category === c._id).map(item => (
-                            <DishCard {...item} />
+                            <DishCard
+                                key={item._id}
+                                {...item}
+                            />
                         ))}
                     </div>
                 </div>

@@ -3,7 +3,7 @@ export default function DishTile({ onAddToCart, ...item }) {
     const { image, name, price, rating, description } = item;
     return (
         <div
-            className="border bg-white rounded-lg shadow-md p-6">
+            className="border bg-white rounded-lg shadow-md p-6 group hover:bg-primarybg hover:shadow-md hover:shadow-black/25 transition-all">
             <div className='text-center'>
                 <img src={image} alt={name} className='max-h-auto max-h-40 block mx-auto' />
             </div>
