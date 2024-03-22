@@ -19,7 +19,7 @@ export default function Hero() {
                 </Link>
             </div>
             <div>
-                <Image className='hidden lg:block absolute right-[280px] top-[20%]'
+                <Image className='hidden lg:block absolute right-[280px] top-[25%]'
                     src={'/berry-pizza.png'}
                     alt='pizza'
                     width={400}

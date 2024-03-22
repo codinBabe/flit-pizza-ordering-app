@@ -1,14 +1,15 @@
 'use client'
-import { CartContext, cartProductPrice } from "@/components/AppContext"
-import { useProfile } from "@/components/UseProfile"
-import UserDetails from "@/components/UserDetails"
-import Image from "next/image"
-import { useContext, useEffect, useState } from "react"
-import { FaRegTrashAlt } from "react-icons/fa"
+import { CartContext, cartProductPrice } from "@/components/AppContext";
+import { useProfile } from "@/components/UseProfile";
+import UserDetails from "@/components/UserDetails";
+import Image from "next/image";
+import { useContext, useEffect, useState } from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function CartPage() {
     const { cartItems, removeCartItem } = useContext(CartContext);
     const [details, setDetails] = useState({});
+    const [showPayPal, setShowPayPal] = useState(false);
     const {data:profileData} = useProfile();
 
     useEffect(()=>{
@@ -40,8 +41,8 @@ export default function CartPage() {
                 cartItems,
             })
         });
-        const link = await response.json();
-        window.location = link;
+        // const link = await response.json();
+        // window.location = link;
     }
 
     function handleDetailsChange(propName, value) {
@@ -96,7 +97,7 @@ export default function CartPage() {
                         Delivery:<br/>
                         Total:
                         </div>
-                        <div className="text-lg font-semibold pl-2 text-right">
+                        <div className="font-semibold pl-2 text-right">
                             ${subTotal}<br />
                             $5<br />
                         ${subTotal + 5}
@@ -110,10 +111,11 @@ export default function CartPage() {
                         detailsProps={details}
                         setDetailsProps={handleDetailsChange}
                     />
-                        <button 
+                        <button
                         type="submit"
                         className="button rounded-md bg-primarybtn text-white"
                         >Pay ${subTotal + 5}</button>
+
                     </form>
                 </div>
             </div>
