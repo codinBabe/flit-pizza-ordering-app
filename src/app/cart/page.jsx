@@ -4,11 +4,12 @@ import { useProfile } from "@/components/UseProfile";
 import UserDetails from "@/components/UserDetails";
 import { PayPalButtons, usePayPalScriptReducer, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function CartPage() {
-    const { cartItems, removeCartItem } = useContext(CartContext);
+    const { cartItems, removeCartItem, clearCart } = useContext(CartContext);
     const [details, setDetails] = useState({});
     const [showPayPal, setShowPayPal] = useState(false);
     const { data: profileData } = useProfile();
@@ -33,38 +34,16 @@ export default function CartPage() {
     }
 
     async function createOrder() {
-        return fetch("/api/paypal/createorder", {
+        const res = await fetch('/api/checkout', {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 details,
                 cartItems,
             })
-        })
-            .then((response) => response.json())
-            .then((order) => {
-                console.log(order)
-                return order.id;
-            });
-    }
-
-    async function onApprove(data) {
-        return fetch("/api/paypal/captureorder", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                orderID: data.orderID,
-            }),
-        })
-            .then((response) => response.json())
-            .then((orderData) => {
-                // Your code here after capture the order
-                console.log(orderData);
-            });
+        });
+        const result = await res.json();
+        return result;
     }
 
     function handleDetailsChange(propName, value) {
@@ -73,21 +52,68 @@ export default function CartPage() {
         })
     }
 
-    const ButtonWrapper = ({ showSpinner }) => {
-        const [{ isPending }] = usePayPalScriptReducer();
+    const ButtonWrapper = ({ currency, showSpinner }) => {
+        const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
+
+        useEffect(() => {
+            dispatch({
+                type: "resetOptions",
+                value: {
+                    ...options,
+                    currency: "USD",
+                },
+            });
+        }, [currency, showSpinner]);
 
         return (
             <>
-                {(showSpinner && isPending) && <div className="spinner" />}
+                {showSpinner && isPending && <div className="spinner" />}
                 <PayPalButtons
                     disabled={false}
+                    forceReRender={[subTotal, currency]}
                     fundingSource={undefined}
-                    Order={createOrder}
-                    Approve={onApprove}
+                    createOrder={async (data, actions) => {
+                        return actions.order
+                            .create({
+                                purchase_units: [
+                                    {
+                                        amount: {
+                                            currency_code: currency,
+                                            value: subTotal + 5,
+                                        },
+                                    },
+                                ],
+                            })
+                            .then((orderId) => {
+                                // Your code here after create the order
+                                return orderId;
+                            });
+                    }}
+                    onApprove={async function (data, actions) {
+                        return actions.order.capture().then(function (details) {
+                            const shipping = details.purchase_units[0].shipping
+                            const orderData = {
+                                details: {
+                                    customer: shipping.name.full_name,
+                                    streetAddress: shipping.address.address_line_1,
+                                },
+                                cartItems,
+                            };
+                            createOrder(orderData)
+                                .then((orderResult) => {
+                                    if (orderResult.ok) {
+                                        redirect(`/orders/${orderResult.body._id}`);
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.error("Error creating order:", error);
+                                });
+                        });
+                    }}
                 />
             </>
         );
-    }
+    };
     return (
         <main className="p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
             <h1 className="font-semibold text-2xl md:text-4xl text-center mb-8">Checkout</h1>
@@ -150,15 +176,22 @@ export default function CartPage() {
                             setDetailsProps={handleDetailsChange}
                         />
                         {showPayPal ? (
-                            <PayPalScriptProvider
-                                options={{
-                                    'client-id': process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-                                    components: "buttons",
-                                    currency: "USD",
-                                    "disable-funding": "credit,card,p24"
-                                }}>
-                                <ButtonWrapper showSpinner={false} />
-                            </PayPalScriptProvider>
+                            <>
+                                <button
+                                    type="button"
+                                    className="bg-white rounded-md my-3"
+                                >CASH ON DELIVERY</button>
+                                <PayPalScriptProvider
+                                    options={{
+                                        'client-id': process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+                                        components: "buttons",
+                                        currency: "USD",
+                                        "disable-funding": "credit,card,p24"
+                                    }}>
+                                    <ButtonWrapper showSpinner={false} />
+                                </PayPalScriptProvider>
+                            </>
+
                         ) : (
                             <button
                                 onClick={() => setShowPayPal(true)}
