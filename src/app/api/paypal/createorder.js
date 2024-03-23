@@ -1,15 +1,12 @@
-
-import mongoose from "mongoose";
-import { authOptions } from "../auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
-import { Order } from "@/models/Order";
 import PaypalClient from "@/components/utils/PayPal";
 import { MenuItem } from "@/models/Menu";
-import paypal from '@paypal/checkout-server-sdk';
+import { Order } from "@/models/Order";
+import paypal from '@paypal/checkout-server-sdk'
+import mongoose from "mongoose";
+import { getServerSession } from "next-auth";
 
-export async function POST(req, res) {
+export default async function Handler(req) {
     mongoose.connect(process.env.MONGO_URL);
-
     const { cartItems, details } = await req.json();
     const session = await getServerSession(authOptions);
     const userEmail = session?.user?.email;
@@ -37,27 +34,20 @@ export async function POST(req, res) {
         }
 
         paypalLineItems.push({
-            quantity: 1,
-            price_data: {
+            amount: {
                 currency: 'USD',
-                product_data: {
-                    name: cartProduct.name,
-                },
-                unit_amount: productPrice * 100,
-            },
+                value: productPrice * 100,
+            }
         })
     }
 
-    const PayPalClient = PaypalClient();
-    const createRequest = new paypal.orders.OrdersCreateRequest();
-    createRequest.headers['prefer'] = 'return=representation'
-    createRequest.requestBody({
+    const PayPalClient = PaypalClient()
+    const request = new paypal.orders.OrdersCreateRequest()
+    request.headers['prefer'] = 'return=representation'
+    request.requestBody({
         intent: 'CAPTURE',
-        purchase_units: paypalLineItems,
+        paypalLineItems
     })
-    const createResponse = await PayPalClient.execute(createRequest);
-
-    // Extract approval URL from createResponse and return it to the frontend
-    const approvalUrl = createResponse.result.links.find(link => link.rel === 'approve').href;
-    return res.status(200).json({ success: true, approvalUrl });
+    const response = await PayPalClient.execute(request)
+    return Response.json({orderDoc, response})
 }

@@ -2,6 +2,7 @@
 import { CartContext, cartProductPrice } from "@/components/AppContext";
 import { useProfile } from "@/components/UseProfile";
 import UserDetails from "@/components/UserDetails";
+import { PayPalButtons, usePayPalScriptReducer, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -10,11 +11,11 @@ export default function CartPage() {
     const { cartItems, removeCartItem } = useContext(CartContext);
     const [details, setDetails] = useState({});
     const [showPayPal, setShowPayPal] = useState(false);
-    const {data:profileData} = useProfile();
+    const { data: profileData } = useProfile();
 
-    useEffect(()=>{
-        if (profileData?.city){
-            const {phone, streetAddress, postalCode, city, country} = profileData;
+    useEffect(() => {
+        if (profileData?.city) {
+            const { phone, streetAddress, postalCode, city, country } = profileData;
             const detailsFromProfile = {
                 phone,
                 streetAddress,
@@ -24,31 +25,68 @@ export default function CartPage() {
             };
             setDetails(detailsFromProfile);
         }
-    },[profileData]);
+    }, [profileData]);
 
     let subTotal = 0;
     for (const p of cartItems) {
         subTotal += cartProductPrice(p);
     }
 
-    async function proceedToCheckout(e){
-        e.preventDefault();
-        const response = await fetch('/api/checkout',{
-            method: 'POST',
-            headers:{'Content-Type:': 'application/json'},
+    async function createOrder() {
+        return fetch("/api/paypal/createorder", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({
                 details,
                 cartItems,
             })
-        });
-        // const link = await response.json();
-        // window.location = link;
+        })
+            .then((response) => response.json())
+            .then((order) => {
+                console.log(order)
+                return order.id;
+            });
+    }
+
+    async function onApprove(data) {
+        return fetch("/api/paypal/captureorder", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                orderID: data.orderID,
+            }),
+        })
+            .then((response) => response.json())
+            .then((orderData) => {
+                // Your code here after capture the order
+                console.log(orderData);
+            });
     }
 
     function handleDetailsChange(propName, value) {
-        setDetails(prevDetails=>{
-            return {...prevDetails, [propName]: value};
+        setDetails(prevDetails => {
+            return { ...prevDetails, [propName]: value };
         })
+    }
+
+    const ButtonWrapper = ({ showSpinner }) => {
+        const [{ isPending }] = usePayPalScriptReducer();
+
+        return (
+            <>
+                {(showSpinner && isPending) && <div className="spinner" />}
+                <PayPalButtons
+                    disabled={false}
+                    fundingSource={undefined}
+                    Order={createOrder}
+                    Approve={onApprove}
+                />
+            </>
+        );
     }
     return (
         <main className="p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
@@ -93,30 +131,43 @@ export default function CartPage() {
                     ))}
                     <div className="py-2 flex justify-end items-center">
                         <div className="text-gray-500">
-                        Subtotal:<br/>
-                        Delivery:<br/>
-                        Total:
+                            Subtotal:<br />
+                            Delivery:<br />
+                            Total:
                         </div>
                         <div className="font-semibold pl-2 text-right">
                             ${subTotal}<br />
                             $5<br />
-                        ${subTotal + 5}
+                            ${subTotal + 5}
                         </div>
                     </div>
                 </div>
                 <div className="bg-gray-100 p-4 rounded-lg">
                     <h2 className="text-lg font-semibold">Checkout</h2>
-                    <form onSubmit={proceedToCheckout}>
-                    <UserDetails
-                        detailsProps={details}
-                        setDetailsProps={handleDetailsChange}
-                    />
-                        <button
-                        type="submit"
-                        className="button rounded-md bg-primarybtn text-white"
-                        >Pay ${subTotal + 5}</button>
+                    <div>
+                        <UserDetails
+                            detailsProps={details}
+                            setDetailsProps={handleDetailsChange}
+                        />
+                        {showPayPal ? (
+                            <PayPalScriptProvider
+                                options={{
+                                    'client-id': process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+                                    components: "buttons",
+                                    currency: "USD",
+                                    "disable-funding": "credit,card,p24"
+                                }}>
+                                <ButtonWrapper showSpinner={false} />
+                            </PayPalScriptProvider>
+                        ) : (
+                            <button
+                                onClick={() => setShowPayPal(true)}
+                                type="button"
+                                className="button rounded-md bg-primarybtn text-white"
+                            >Pay ${subTotal + 5}</button>
+                        )}
 
-                    </form>
+                    </div>
                 </div>
             </div>
         </main>
